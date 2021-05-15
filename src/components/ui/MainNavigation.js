@@ -26,13 +26,13 @@ function MainNavigation(props){
                     <nav>   
                         <ul> 
                             <li>
-                                <Link style={('/' === getPath.pathname) ? selected: null}to='/'>All Monsters</Link>
+                                <Link style={('/' === getPath.pathname) ? selected: null} to='/'>All Monsters</Link>
                             </li>
                             <li>
                                 <Link to='/'>Edit Monsters</Link>
                             </li>
                             <li>
-                                <Link to='/'>Create Monster</Link>
+                                <Link style={('/add' === getPath.pathname) ? selected: null} to='/add'>Create Monster</Link>
                             </li>
                         </ul>
                     </nav>

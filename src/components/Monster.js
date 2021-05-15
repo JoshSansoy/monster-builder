@@ -14,7 +14,7 @@ function Monster(props){
         
         <div className={styles.item}>
             <Card>
-                <div>
+                <div className={styles.image}>
                     {image}
                 </div>
                 <Card>
