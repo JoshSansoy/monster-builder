@@ -16,16 +16,15 @@ function AddMonsterForm(props) {
 
     function submitMonster(){
         const {name, image, description} = newMonster;
-        if (name || image || description) {
-
-            if(props.mode === 'edit') {
-                props.hideEdit();
-                props.onEditMonster(newMonster, props.targetMonster.id)
-            }
-
-            else props.onAddMonster(newMonster)
+        
+        if(props.mode === 'edit') {
+            props.hideEdit();
+            props.onEditMonster(newMonster, props.targetMonster.id)
         }
+
+        else props.onAddMonster(newMonster)
     }
+
     function changeHealth(mode){
         let newHealth;
         (mode === '+') ? newHealth = health + 1 : newHealth = health -1
@@ -55,7 +54,7 @@ function AddMonsterForm(props) {
             updateHealth(props.targetMonster.health)
             updateAttack(props.targetMonster.attack)
         }
-    }, [])
+    }, [props.mode, props.targetMonster])
 
     return(
         <div className={styles.formItems}>

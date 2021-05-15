@@ -41,7 +41,6 @@ function EditMonsterPage (props) {
                     .then(() => {
                     setShouldLoad(!shouldLoad);
                     });
-
         };
 
     function deleteMonsterHandler(id){
