@@ -20,7 +20,7 @@ function Monster(props){
                 <Card>
                     <div className={styles.statIcons}>
                         <div>
-                            <AiFillHeart size='2rem' color='red'/>
+                            <AiFillHeart size='2rem' color='#ff4141'/>
                             <p>{props.health}</p>
                         </div>
                         <div>
