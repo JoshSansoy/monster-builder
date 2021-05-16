@@ -19,6 +19,7 @@ function MonsterList(props) {
                     description={monster.description}
                     health={monster.health}
                     attack={monster.attack}
+                    returnSelection={props.returnSelection}
                     />
                 ))}
             </div>

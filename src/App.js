@@ -5,6 +5,7 @@ import { Route } from 'react-router-dom'
 import HomePage from './pages/HomePage';
 import AddMonsterPage from './pages/AddMonsterPage';
 import EditMonsterPage from './pages/EditMonsterPage';
+import BattlePage from './pages/BattlePage';
 
 function App() {
   return (
@@ -18,6 +19,9 @@ function App() {
       </Route>
       <Route path='/edit' exact>
         <EditMonsterPage/>
+      </Route>
+      <Route path='/fight' exact>
+        <BattlePage/>
       </Route>
     </Navbar>
 

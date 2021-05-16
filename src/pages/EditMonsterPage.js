@@ -39,8 +39,8 @@ function EditMonsterPage (props) {
             axios.put('/api/monsters/' + id + '/', monster, 
                 {headers: {'X-CSRFTOKEN': CSRFToken}})
                     .then(() => {
-                    setShouldLoad(!shouldLoad);
-                    });
+                        setShouldLoad(!shouldLoad);
+                        });
         };
 
     function deleteMonsterHandler(id){

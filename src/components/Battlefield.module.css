@@ -1,0 +1,43 @@
+.Wrapper{
+    width: 1200px;
+    max-width:100%;
+    margin-left:auto;
+    margin-right:auto;
+}
+
+.Battlefield{
+    display:flex;
+    justify-content: space-between;
+    flex-wrap:wrap;
+}
+
+.Fighter button {
+    width: 100%;
+    border: none;
+    cursor:pointer;
+    border-radius: 4px;
+    padding: 1rem 1.5rem;
+    font-weight: bold;
+    color:white;
+    text-decoration: none;
+    background-color:dodgerblue;
+    transition: 0.3s;
+    transform: translate(0, -100%);
+}
+
+.Fighter {
+    width: 15rem;
+}
+
+.DisplayBox{
+    width: 100%;
+    max-width: 30rem;
+}
+.DisplayBox textarea{
+    width: 100%;
+    height: 20rem;
+    resize:none;
+}
+.DisplayBox button{
+   
+}

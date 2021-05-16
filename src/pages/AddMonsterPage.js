@@ -1,8 +1,10 @@
 import {useHistory} from 'react-router-dom';
+import { Fragment, useState } from 'react';
+
 import axios from 'axios';
 import AddMonsterForm from '../components/AddMonsterForm'
 import CSRFToken from '../hoc/CSRFToken'
-import { Fragment, useState } from 'react';
+
 import Modal from '../components/ui/Modal'
 
 function AddMonsterPage(props) {

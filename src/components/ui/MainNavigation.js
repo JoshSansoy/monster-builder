@@ -7,6 +7,7 @@ import styles from './MainNavigation.module.css';
 import logo from "../../assets/logo.png"
 
 const selected = {backgroundColor:"dodgerblue", color:"white"}
+const fightSelected = {backgroundColor:"#ff4141", color:"white"}
 
 function MainNavigation(props){
 
@@ -23,7 +24,7 @@ function MainNavigation(props){
                         <img src={logo} alt="logo"/>
                         <p>Monster Builder</p> 
                     </div>
-                    <nav>   
+                    <nav> 
                         <ul> 
                             <li>
                                 <Link style={('/' === getPath.pathname) ? selected: null} to='/'>All Monsters</Link>
@@ -33,6 +34,9 @@ function MainNavigation(props){
                             </li>
                             <li>
                                 <Link style={('/add' === getPath.pathname) ? selected: null} to='/add'>Create Monster</Link>
+                            </li>
+                            <li className={styles.FightButton}>
+                                <Link style={('/fight' === getPath.pathname) ? fightSelected: null} to='/fight'>FIGHT</Link>
                             </li>
                         </ul>
                     </nav>

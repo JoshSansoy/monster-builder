@@ -1,4 +1,4 @@
-import {useState} from 'react';
+import {Fragment, useState} from 'react';
 
 import Card from './ui/Card';
 import AddMonsterForm from './AddMonsterForm';
@@ -25,6 +25,19 @@ function EditableMonster(props){
     function deleteHandler(){
         props.onDeleteMonster(monster.id)
     }
+    
+    let content = (
+        <Fragment>
+            <button onClick={showEditHandler}>Edit</button>
+            <button onClick={deleteHandler}>Delete</button>
+        </Fragment>
+    )
+
+    if (props.returnSelection){
+        content = (
+            <button onClick={() => props.returnSelection(monster)}>Select</button>
+        )
+    }
 
     return(
         <div className={styles.wrapper}>
@@ -37,8 +50,7 @@ function EditableMonster(props){
                         <h3>{monster.name}</h3>
                     </div>
                     <div className={styles.actions}>
-                        <button onClick={showEditHandler}>Edit</button>
-                        <button onClick={deleteHandler}>Delete</button>
+                        {content}
                     </div>
                 
             </div>
