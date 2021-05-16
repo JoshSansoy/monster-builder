@@ -5,6 +5,8 @@ import styles from './Battlefield.module.css'
 import Modal from '../components/ui/Modal'
 import axios from 'axios'
 import MonsterList from './MonsterList'
+import { IoReloadCircle } from 'react-icons/io5'
+import Card from '../components/ui/Card'
 
 function Battlefield() {
 
@@ -77,6 +79,11 @@ function Battlefield() {
             <MonsterList mode={'edit'} returnSelection={monsterSelection} monsters={loadedMonsters}/>
         </Modal>
     )
+    
+    let ready = false;
+    if (!showButton.buttonA.visible & !showButton.buttonB.visible){
+        ready = true;
+    }
 
     return(
         <Fragment>
@@ -94,9 +101,11 @@ function Battlefield() {
                         />
                         {showButton.buttonA.visible ? <button name="buttonA" onClick={selectFighter}>Choose Monster</button>: null}
                     </div>
+                    
                     <div className={styles.DisplayBox}>
                         <textarea value = {displayText}/>
-                        <button>Start</button>
+                        <button disabled={!ready}>Start</button>
+                        <button><IoReloadCircle color={"white"} size={"2rem"}/></button>
                     </div>
                     <div className={styles.Fighter}>
                         <Monster 

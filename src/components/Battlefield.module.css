@@ -39,17 +39,35 @@
     resize:none;
     padding:0;
     border:0;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    margin-bottom: 1rem;
 }
 .DisplayBox button{
     margin:0;
-    width: 100%;
+    height:3rem;
+    width: 75%;
     border: none;
     cursor:pointer;
     border-radius: 4px;
-    padding: 1rem 1.5rem;
     font-weight: bold;
     color:white;
     text-decoration: none;
-    background-color:grey;
+    background-color:#ff4141;
     transition: 0.3s;
+    padding:0;
+    float:left;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    margin-bottom: 2rem;
+
+}
+
+.DisplayBox button:disabled{
+    background-color:grey;
+}
+
+.DisplayBox button:nth-child(3){
+    width: 20%;
+    margin-left:5%;
+    background-color:dodgerblue;
 }
