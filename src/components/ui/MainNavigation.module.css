@@ -63,5 +63,5 @@
 
 .FightButton a:hover {
     background-color: #ff4141;
-    box-shadow: 0px 10px 50px 10px  rgba(255, 0, 0, 0.486);
+    box-shadow: 0px 5px 50px 5px  rgba(255, 0, 0, 0.486);
 }

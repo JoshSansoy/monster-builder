@@ -7,6 +7,8 @@ import axios from 'axios'
 import MonsterList from './MonsterList'
 import { IoReloadCircle } from 'react-icons/io5'
 import Card from '../components/ui/Card'
+import CSRFToken from '../hoc/CSRFToken'
+import { cloneDeep } from 'lodash';
 
 function Battlefield() {
 
@@ -16,10 +18,13 @@ function Battlefield() {
     const [currentButton, setCurrentButton] = useState();
     const [showButton, setShowButton] = useState({
         buttonA : {visible:true},
-        buttonB : {visible:true}
+        buttonB : {visible:true},
+        buttonStart: {visible:true}
     });
 
+    const [displayLog, setDisplayLog] = useState();
     const [displayText, setText] = useState('...waiting for opponents');
+    const [updateToken, setUpdateToken] = useState();
 
     const [fighterA, setFighterA] = useState({});
     const [fighterB, setFighterB] = useState({});
@@ -47,9 +52,33 @@ function Battlefield() {
         fetchData();
     }, []);
 
-    function updateDisplay(t){
+    const updateDisplay = (t) => {
         setText(displayText + '\n' + t)
     }
+    
+    useEffect(() => {
+        if(!!updateToken){
+            updateDisplay(displayLog[updateToken])
+        }
+    }, [updateToken])
+
+    function showFightLog(){
+        let count = 0;
+        let max = displayLog.length
+        setInterval(function(){
+            if(count === max){
+                return;
+            }
+            setUpdateToken(count);
+            count++;
+        }, 2000);
+    }
+
+    useEffect(() => {
+        if(displayLog){
+            showFightLog()
+        }
+    },[displayLog])
 
     function selectFighter(e){
         setCurrentButton(e.target.name);
@@ -58,6 +87,16 @@ function Battlefield() {
     }
     function toggleModal(){
         setModal(!showModal);
+    }
+
+    function startFight(){ 
+        const fighters = [fighterA.id,fighterB.id] 
+        axios.post('api/fight/', fighters,
+        {headers: {'X-CSRFTOKEN': CSRFToken}})
+            .then(response => {
+                setShowButton({...showButton, buttonStart:{visible:false}})
+                setDisplayLog(response.data);
+            })
     }
 
     function monsterSelection(m){
@@ -73,6 +112,8 @@ function Battlefield() {
         }
         setModal(!showModal);
     }
+
+    
 
     const content = (
         <Modal bigMode={true} hideModal={() => toggleModal()}>
@@ -104,7 +145,7 @@ function Battlefield() {
                     
                     <div className={styles.DisplayBox}>
                         <textarea value = {displayText}/>
-                        <button disabled={!ready}>Start</button>
+                        <button onClick={startFight} disabled={!ready || !showButton.buttonStart.visible}>Start</button>
                         <button><IoReloadCircle color={"white"} size={"2rem"}/></button>
                     </div>
                     <div className={styles.Fighter}>

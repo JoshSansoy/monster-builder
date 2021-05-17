@@ -31,3 +31,10 @@
     height:8rem;
     text-align:center;
 }
+.content p {
+    padding-left: 1rem;
+    padding-right: 1rem;
+    margin:0;
+    font-size:0.9rem; 
+    word-wrap: break-word;
+}
