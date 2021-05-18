@@ -8,7 +8,7 @@ import MonsterList from './MonsterList'
 import { IoReloadCircle } from 'react-icons/io5'
 import Card from '../components/ui/Card'
 import CSRFToken from '../hoc/CSRFToken'
-import { cloneDeep } from 'lodash';
+import { useHistory } from 'react-router'
 
 function Battlefield() {
 
@@ -21,13 +21,17 @@ function Battlefield() {
         buttonB : {visible:true},
         buttonStart: {visible:true}
     });
-
+    
     const [displayLog, setDisplayLog] = useState();
     const [displayText, setText] = useState('...waiting for opponents');
-    const [updateToken, setUpdateToken] = useState();
+    const [lineIndex, setLineIndex] = useState(0);
 
     const [fighterA, setFighterA] = useState({});
     const [fighterB, setFighterB] = useState({});
+    const [turnSwap, setTurnSwap] = useState(true);
+    const [damageState, setDamageState] = useState({fighterA:false, fighterB:false});
+
+    const history = useHistory()
 
     useEffect(() => {
         const fetchData = async () => {
@@ -55,30 +59,33 @@ function Battlefield() {
     const updateDisplay = (t) => {
         setText(displayText + '\n' + t)
     }
-    
-    useEffect(() => {
-        if(!!updateToken){
-            updateDisplay(displayLog[updateToken])
-        }
-    }, [updateToken])
 
-    function showFightLog(){
-        let count = 0;
-        let max = displayLog.length
-        setInterval(function(){
-            if(count === max){
-                return;
+    useEffect(() => {
+        let timeout;
+        const currentFighter = turnSwap ? fighterA : fighterB
+        const opponentFighter = !turnSwap ? fighterA : fighterB
+
+        if(!!displayLog){
+            if(displayLog[lineIndex].substring(displayLog[lineIndex].length -6, displayLog[lineIndex].length) === 'damage'){
+
+                const damage = displayLog[lineIndex].substring(currentFighter.name.length).match(/(\d+)/);
+
+                setDamageState({[opponentFighter.position]: true});
+                opponentFighter.health = opponentFighter.health - damage[0]
+                setTurnSwap(!turnSwap);
+                
             }
-            setUpdateToken(count);
-            count++;
-        }, 2000);
-    }
 
-    useEffect(() => {
-        if(displayLog){
-            showFightLog()
+            if (lineIndex < displayLog.length -1) {
+                timeout = setTimeout(() => setLineIndex(lineIndex + 1), 1000);
+            }
+            updateDisplay(displayLog[lineIndex])
+            return () => {
+                clearTimeout(timeout);
+            };
         }
-    },[displayLog])
+
+    },[displayLog, lineIndex]);
 
     function selectFighter(e){
         setCurrentButton(e.target.name);
@@ -101,19 +108,21 @@ function Battlefield() {
 
     function monsterSelection(m){
         if (currentButton === 'buttonA'){
-            setFighterA(m)
+            setFighterA({...m, 'position':'fighterA'})
             setShowButton({...showButton, buttonA:{visible:false}})
             updateDisplay('Fighter 1 Selected')
         }
         if (currentButton === 'buttonB'){
-            setFighterB(m)
+            setFighterB({...m, 'position':'fighterB'})
             setShowButton({...showButton, buttonB:{visible:false}})
             updateDisplay('Fighter 2 Selected')
         }
         setModal(!showModal);
     }
 
-    
+    function refreshPage(){
+        history.go(0);
+    }
 
     const content = (
         <Modal bigMode={true} hideModal={() => toggleModal()}>
@@ -139,14 +148,14 @@ function Battlefield() {
                             description={fighterA.description}
                             health={fighterA.health}
                             attack={fighterA.attack}
+                            damageFlash={damageState.fighterA}
                         />
                         {showButton.buttonA.visible ? <button name="buttonA" onClick={selectFighter}>Choose Monster</button>: null}
                     </div>
-                    
                     <div className={styles.DisplayBox}>
-                        <textarea value = {displayText}/>
+                        <textarea readOnly value = {displayText}/>
                         <button onClick={startFight} disabled={!ready || !showButton.buttonStart.visible}>Start</button>
-                        <button><IoReloadCircle color={"white"} size={"2rem"}/></button>
+                        <button onClick={refreshPage}><IoReloadCircle color={"white"} size={"2rem"}/></button>
                     </div>
                     <div className={styles.Fighter}>
                         <Monster 
@@ -156,7 +165,9 @@ function Battlefield() {
                             name={fighterB.name}
                             description={fighterB.description}
                             health={fighterB.health}
-                            attack={fighterB.attack}/>
+                            attack={fighterB.attack}
+                            damageFlash={damageState.fighterB}
+                        />
                         {showButton.buttonB.visible ? <button name="buttonB" onClick={selectFighter}>Choose Monster</button>: null}
                     </div>
                 </div>

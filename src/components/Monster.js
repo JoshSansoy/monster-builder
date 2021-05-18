@@ -18,7 +18,7 @@ function Monster(props){
                     {image}
                 </div>
                 <Card>
-                    <div className={styles.statIcons}>
+                    <div className={styles.statIcons} style={props.damageFlash ? {backgroundColor:'#b30000'} : null}>
                         <div>
                             <AiFillHeart size='2rem' color='#ff4141'/>
                             <p>{props.health}</p>
