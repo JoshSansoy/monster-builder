@@ -2,7 +2,7 @@
 
 This project is a single page ReactJS app that allows the user to create their own 'Monsters', and have them fight each other.
 
-A live server is hosted on Firebase and can be found here https://monster-builder-app.web.app/
+A live site is hosted on Firebase and can be found here https://monster-builder-app.web.app/
 
 ## Usage
 
