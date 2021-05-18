@@ -29,10 +29,19 @@
     font-size:1.2rem;
 }
 .content{
+    
     height:8rem;
     text-align:center;
 }
-.content p {
+
+.content h3{
+    margin:0.5rem;
+}
+.Description{
+    padding-top:0.5rem;
+    padding-bottom: auto;
+}
+.Description p {
     padding-left: 1rem;
     padding-right: 1rem;
     margin:0;

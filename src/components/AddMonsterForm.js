@@ -80,6 +80,7 @@ function AddMonsterForm(props) {
                         <label htmlFor='name'>Name</label>
                         <input
                         value={newMonster.name}
+                        maxlength={'17'}
                         name='name'
                         type='text'
                         onChange={handleInputChange}
@@ -97,6 +98,7 @@ function AddMonsterForm(props) {
                     <div className={styles.control}>
                         <label htmlFor='description'>Description</label>
                         <textarea
+                        maxlength="100"
                         style={{resize:"none"}}
                         value={newMonster.description}
                         name='description'
@@ -111,7 +113,7 @@ function AddMonsterForm(props) {
             <div className={styles.preview}>
                 <Card>
                     <Monster name={newMonster.name} image={newMonster.image} description={newMonster.description} health={health} attack={attack}/>
-                    <button onClick={submitMonster}className={styles.addMonsterButton}>Add Monster</button> 
+                    <button onClick={submitMonster}className={styles.addMonsterButton}>Save</button> 
                 </Card>
             </div>
         </div>

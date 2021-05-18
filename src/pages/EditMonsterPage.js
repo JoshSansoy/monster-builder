@@ -14,7 +14,7 @@ function EditMonsterPage (props) {
     useEffect(() => {
         const fetchData = async () => {
             const result = await axios(
-            '/api/monsters/'
+            'https://joshsansoy.eu.pythonanywhere.com/api/monsters/'
             );
             
             const data = result.data;
@@ -36,7 +36,7 @@ function EditMonsterPage (props) {
     }, [shouldLoad]);
 
     function editMonsterHandler(monster, id){
-            axios.put('/api/monsters/' + id + '/', monster, 
+            axios.put('https://joshsansoy.eu.pythonanywhere.com/api/monsters/' + id + '/', monster, 
                 {headers: {'X-CSRFTOKEN': CSRFToken}})
                     .then(() => {
                         setShouldLoad(!shouldLoad);
@@ -44,7 +44,7 @@ function EditMonsterPage (props) {
         };
 
     function deleteMonsterHandler(id){
-        axios.delete('/api/monsters/' + id + '/', 
+        axios.delete('https://joshsansoy.eu.pythonanywhere.com/api/monsters/' + id + '/', 
             {headers: {'X-CSRFTOKEN': CSRFToken}})
                 .then(() => {
                     setShouldLoad(!shouldLoad);

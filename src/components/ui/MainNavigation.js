@@ -1,6 +1,6 @@
 import {useEffect} from 'react';
 
-import {Link,useLocation} from 'react-router-dom';
+import {Link,useLocation,useHistory} from 'react-router-dom';
 import {Fragment} from 'react'
 
 import styles from './MainNavigation.module.css';
@@ -10,20 +10,25 @@ const selected = {backgroundColor:"dodgerblue", color:"white"}
 const fightSelected = {backgroundColor:"#ff4141", color:"white"}
 
 function MainNavigation(props){
+    const history = useHistory()
 
     const getPath = useLocation();
     useEffect(()=> {
         console.log(getPath.pathname)
     }, [getPath])
 
+    function logoClick(){
+        history.push("/")
+    }
+
     return (
         <Fragment>
             <header className={styles.header}>
                 <div className={styles.flexWrapper}>
-                    <div className={styles.headerLeft}>
-                        <img src={logo} alt="logo"/>
-                        <p>Monster Builder</p> 
-                    </div>
+                        <div style={{cursor:'default'}} className={styles.headerLeft}>
+                                <img onClick={logoClick} style={{cursor:'pointer'}} src={logo} alt="logo"/>
+                                <p>Monster Builder</p> 
+                        </div>     
                     <nav> 
                         <ul> 
                             <li>

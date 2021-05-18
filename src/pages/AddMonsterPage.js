@@ -18,7 +18,7 @@ function AddMonsterPage(props) {
     }
 
     function addMonsterHandler(monster){
-        axios.post('api/monsters/', monster,
+        axios.post('https://joshsansoy.eu.pythonanywhere.com/api/monsters/', monster,
         {headers: {'X-CSRFTOKEN': CSRFToken}})
             .catch((error) => {
                 if (error.response) {

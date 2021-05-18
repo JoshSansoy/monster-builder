@@ -12,7 +12,7 @@ function HomePage() {
     useEffect(() => {
         const fetchData = async () => {
             const result = await axios(
-                'api/monsters'
+                'https://joshsansoy.eu.pythonanywhere.com/api/monsters'
             );
 
             const data = result.data;
@@ -24,8 +24,16 @@ function HomePage() {
                     ...data[key]
                 };
 
+                
                 monsters.push(monster);
             }
+
+            monsters.sort((a,b) => {
+                    if(a.name < b.name) {return -1;}
+                    if(a.name > b.name) {return 1;}
+                    return 0
+                })
+                
             setMonsters(monsters);
             setIsLoading(false);
         }

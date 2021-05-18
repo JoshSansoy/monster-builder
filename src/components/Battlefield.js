@@ -36,7 +36,7 @@ function Battlefield() {
     useEffect(() => {
         const fetchData = async () => {
             const result = await axios(
-                'api/monsters'
+                'https://joshsansoy.eu.pythonanywhere.com/api/monsters'
             );
 
             const data = result.data;
@@ -98,7 +98,7 @@ function Battlefield() {
 
     function startFight(){ 
         const fighters = [fighterA.id,fighterB.id] 
-        axios.post('api/fight/', fighters,
+        axios.post('https://joshsansoy.eu.pythonanywhere.com/api/fight/', fighters,
         {headers: {'X-CSRFTOKEN': CSRFToken}})
             .then(response => {
                 setShowButton({...showButton, buttonStart:{visible:false}})

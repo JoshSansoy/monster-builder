@@ -31,7 +31,9 @@ function Monster(props){
                 </Card>
                 <div className={styles.content}>
                     <h3>{props.name}</h3>
-                    <p>{props.description}</p>
+                    <div className={styles.Description}>
+                        <p>{props.description}</p>
+                    </div>
                 </div>    
             </Card>
         </div>
