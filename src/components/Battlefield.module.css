@@ -74,13 +74,15 @@
     background-color:dodgerblue;
 }
 
-.DisplayBox button:nth-child(3):hover{
-    background-color: darkblue;
-    border-color: #000000;
-}
+
 
 .DisplayBox button:hover:not([disabled]){
     background-color: darkred;
+    border-color: #000000;
+}
+
+.DisplayBox button:nth-child(3):hover{
+    background-color: darkblue;
     border-color: #000000;
 }
 
