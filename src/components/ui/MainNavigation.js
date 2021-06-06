@@ -38,7 +38,7 @@ function MainNavigation(props){
                                 <Link style={('/edit' === getPath.pathname) ? selected: null} to='/edit'>Edit Monsters</Link>
                             </li>
                             <li>
-                                <Link style={('/add' === getPath.pathname) ? selected: null} to='/add'>Create Monster</Link>
+                                <Link style={('/add' === getPath.pathname) ? selected: null} to='/add'>Add Monster</Link>
                             </li>
                             <li className={styles.FightButton}>
                                 <Link style={('/fight' === getPath.pathname) ? fightSelected: null} to='/fight'>FIGHT</Link>
